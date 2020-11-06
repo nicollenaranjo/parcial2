@@ -4,6 +4,6 @@
 # Actualmente la funcionalidad de tarjetas rojas solo deja expulsar un jugador por equipo. Modifiquela para que pueda expulsar de 1 a 5      jugadores por equipo. (5 puntos) /.
 # Funcionalidad de crear selecciones con archivos Json. (5 puntos) /.
 # Funcionalidad de crear y ejecutar partidos.  (5 puntos)
-# Captura de errores (5 puntos) /.
-# Implemente el patrón observer para actualizar la información de las selecciones al finalizar los partidos (10 puntos)
+# Captura de errores (5 puntos) /. Mas o menos --- Excepcion de que no puede ser el mismo equipo visitante y local
+# Implemente el patrón observer para actualizar la información de las selecciones al finalizar los partidos (10 puntos) /.
 

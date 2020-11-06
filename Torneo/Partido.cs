@@ -24,23 +24,55 @@ namespace linq.Torneo
         #region Methods
         private void CalcularExpulsiones()
         {
-            Random random = new Random();
-            List<string> jugadoresVacios = Enumerable.Repeat(string.Empty, 50).ToList(); //crea una lista con un item repetido n veces
-            List<String> JugadoresLocales = EquipoLocal.Seleccion.Jugadores.Select(j => j.Nombre).ToList().Concat(jugadoresVacios).ToList();
-            List<String> JugadoresVisitantes = EquipoVisitante.Seleccion.Jugadores.Select(j => j.Nombre).ToList().Concat(jugadoresVacios).ToList();
-            int position = random.Next(JugadoresLocales.Count);
-            String expulsadoLocal = JugadoresLocales[position];
-            position = random.Next(JugadoresVisitantes.Count);
-            String expulsadoVisitante = JugadoresVisitantes[position];
             EquipoLocal.ExpulsarJugador();
             EquipoVisitante.ExpulsarJugador();
         }
 
-        private void CalcularResultado()
+        private void CalcularSanciones()
         {
+            EquipoLocal.SancionarJugador();
+            EquipoVisitante.SancionarJugador();
+        }
+
+        private void CalcularPuntos()
+        {
+            Random rand = new Random();
+            if(EquipoVisitante.Goles > EquipoLocal.Goles )
+            {
+                EquipoVisitante.Seleccion.PuntosTotales += 3;
+            }
+            else if(EquipoLocal.Goles > EquipoVisitante.Goles)
+            {
+                EquipoLocal.Seleccion.PuntosTotales += 3;
+            }
+            else if(EquipoLocal.Goles == EquipoVisitante.Goles)
+            {
+                EquipoVisitante.Seleccion.PuntosTotales++;
+                EquipoLocal.Seleccion.PuntosTotales++;
+            }
+        }
+
+        private void CalcularAsistencia()
+        {
+            foreach (Jugador e in EquipoLocal.Seleccion.Jugadores)
+            {
+                EquipoLocal.Seleccion.AsistenciasTotales += e.Asistencias;
+            }
+            foreach (Jugador e in EquipoVisitante.Seleccion.Jugadores)
+            {
+                EquipoVisitante.Seleccion.AsistenciasTotales += e.Asistencias;
+            }
+        }
+
+        private string CalcularResultado()
+        {
+            string resultado = "0 - 0";
             Random random = new Random();
             EquipoLocal.Goles = random.Next(0,6);
             EquipoVisitante.Goles = random.Next(0,6);
+            CalcularPuntos();
+            resultado = EquipoLocal.Goles.ToString() + " - " + EquipoVisitante.Goles.ToString();
+            return resultado;
         }
 
         public string Resultado()
@@ -48,9 +80,9 @@ namespace linq.Torneo
             string resultado = "0 - 0";
             try
             {
+                CalcularSanciones();
                 CalcularExpulsiones();
-                CalcularResultado();
-                resultado = EquipoLocal.Goles.ToString() + " - " + EquipoVisitante.Goles.ToString();
+                resultado = CalcularResultado();
             }
             catch(LoseForWException ex)
             {
@@ -72,6 +104,5 @@ namespace linq.Torneo
             return resultado;
         }
         #endregion Methods
-
     }
 }

@@ -36,11 +36,12 @@ namespace linq.Torneo
                 Jugador jugadorExpulsado = Seleccion.Jugadores[position];
                 TarjetasRojas++;
                 if (Seleccion.Jugadores.Count < 7) 
-                    {
-                        LoseForWException ex = new LoseForWException(Seleccion.Nombre);
-                        ex.NombreEquipo = Seleccion.Nombre;
-                        throw ex;
-                    }
+                {
+                    LoseForWException ex = new LoseForWException(Seleccion.Nombre);
+                    ex.NombreEquipo = Seleccion.Nombre;
+                    throw ex;
+                }
+                Console.WriteLine("Sea expulsado a {0} del la Seleccion {1}", jugadorExpulsado.Nombre, Seleccion.Nombre );
                 Seleccion.Jugadores.Remove(jugadorExpulsado);
             }
         }
@@ -55,13 +56,22 @@ namespace linq.Torneo
                 Jugador jugadorSancionado = Seleccion.Jugadores[position];
                 TarjetasAmarillas++;
                 jugadorSancionado.Sanciones++;
-                if (jugadorSancionado.Sanciones >= 2 ) 
+                if (Seleccion.Jugadores.Count < 7) 
+                {
+                    LoseForWException ex = new LoseForWException(Seleccion.Nombre);
+                    ex.NombreEquipo = Seleccion.Nombre;
+                    throw ex;
+                }
+                if (jugadorSancionado.Sanciones > 1 ) 
                 {
                     TarjetasRojas++;
                     Seleccion.Jugadores.Remove(jugadorSancionado);
+                    Console.WriteLine("Sea expulsado a {0} del la Seleccion {1} por tener dos tarjetas amarillas", jugadorSancionado.Nombre, Seleccion.Nombre );
                 }
-                
-                Console.WriteLine("No existe ese jugador para sancionarlo del equipo " + Seleccion.Nombre);
+                else
+                {
+                    Console.WriteLine("Sea sancionado a {0} del la Seleccion {1}", jugadorSancionado.Nombre, Seleccion.Nombre );
+                }
             }
         }
         #endregion Methods

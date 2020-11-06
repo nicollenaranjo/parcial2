@@ -15,16 +15,16 @@ namespace linq.Torneo
         public int Posicion { get; set; }
 
         [JsonProperty("ataque")]
-        public double Ataque { get; set; }
+        public int Ataque { get; set; }
 
         [JsonProperty("defensa")]
-        public double Defensa { get; set; }
+        public int Defensa { get; set; }
 
         [JsonProperty("goles")]
-        public double Goles { get; set; }
+        public int Goles { get; set; }
 
         [JsonProperty("asistencias")]
-        public double Asistencias { get; set; }
+        public int Asistencias { get; set; }
 
         [JsonProperty("sanciones")]
         public int Sanciones { get; set; }
@@ -33,7 +33,7 @@ namespace linq.Torneo
         #endregion Properties
 
         #region Initialize
-        public Jugador(string n, int e, int p, double a, double d, int g, int s) 
+        public Jugador(string n, int e, int p, int a, int d, int g, int s) 
         {
             this.Nombre = n;
             this.Edad = e;

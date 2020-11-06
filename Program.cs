@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using linq.Torneo;
 using Newtonsoft.Json;
+using Observer;
 
 namespace linq
 {
@@ -17,8 +18,19 @@ namespace linq
             Seleccion Francia = Selecciones.First(s => s.Nombre == "Francia") as Seleccion;
             //Partido partido1 = new Partido(Francia, Argentina);
             Datos.crearSeleccionJson( "Alemania", Francia.Jugadores);
-            //Console.WriteLine(partido1.Resultado());
+            Seleccion Alemania = Selecciones.First(s => s.Nombre == "Alemania") as Seleccion;
+            Partido p = new Partido( Francia, Alemania);
+            //p.Resultado();
+            Console.WriteLine(p.Resultado());
 
+            GestorPartido gestor = new GestorPartido(); 
+            AsistenciasTotales a = new AsistenciasTotales();
+            GolesTotales g = new GolesTotales();
+            PuntosTotales pu = new PuntosTotales();
+            gestor.Subcribe(a);
+            gestor.Subcribe(g);
+            gestor.Subcribe(pu);
+            gestor.Notify(p);
 
            // var seleccionSerializada = JsonConvert.SerializeObject(Francia);
            

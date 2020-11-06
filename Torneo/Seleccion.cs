@@ -24,6 +24,14 @@ namespace linq.Torneo
         #endregion Properties
 
         #region Initialize
+        public Seleccion()
+        {
+            Nombre = "";
+            PuntosTotales = 0;
+            GolesTotales = 0;
+            AsistenciasTotales = 0;
+            Jugadores = new List<Jugador>();
+        }
 
         #endregion Initialize
 
