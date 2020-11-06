@@ -6,5 +6,6 @@ namespace Excepciones.CustomExceptions
     {
         public ErrorNumber() { }
         public ErrorNumber(int n) : base(String.Format("El numero de jugadores: {0}, no son los correctos", n )) { }
+        public int num {get; set;}
     }
 }

@@ -27,7 +27,21 @@ namespace linq.Torneo
 
         public void crearSeleccionJson(string n, List<Jugador> jugadores)
         {
-            ErrorNumber ex = new ErrorNumber(jugadores.Count);
+            foreach( Seleccion s in Selecciones )
+            {
+                if( s.Nombre == n )
+                {
+                    ErrorName ex = new ErrorName(n);
+                    ex.name = n;
+                    throw ex;
+                }
+            }
+            if(jugadores.Count != 11)
+            {
+                ErrorNumber ex = new ErrorNumber(jugadores.Count);
+                ex.num = jugadores.Count;
+                throw ex;
+            }
             Seleccion s1 = new Seleccion();
             s1.Nombre = n;
             s1.Jugadores = jugadores;
