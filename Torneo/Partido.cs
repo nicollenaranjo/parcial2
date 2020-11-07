@@ -92,11 +92,13 @@ namespace linq.Torneo
                 if (ex.NombreEquipo == EquipoLocal.Seleccion.Nombre)
                 {
                     EquipoVisitante.Goles += 3;
+                    EquipoLocal.Seleccion.PuntosTotales+=3;
                     resultado = "0 - 3";
                 }
                 else
                 {
                     EquipoLocal.Goles += 3;
+                    EquipoLocal.Seleccion.PuntosTotales+=3;
                     resultado = "3 - 0";
                 }
             }

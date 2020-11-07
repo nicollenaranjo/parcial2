@@ -46,11 +46,7 @@ namespace linq.Torneo
             s1.Nombre = n;
             s1.Jugadores = jugadores;
             Selecciones.Add(s1);
-            String output = JsonConvert.SerializeObject(s1);
-            File.WriteAllText("./seleccion" + n + ".json", output);
-            Seleccion SeleccionDeserializada = JsonConvert.DeserializeObject<Seleccion>(output);
-            String jugadoresSeleccionCreadaSerializados = JsonConvert.SerializeObject(s1.Jugadores);
-            File.WriteAllText("./jugadoresCreada" + n + ".json", jugadoresSeleccionCreadaSerializados);
+            GestorJson g1 = new GestorJson(s1);
         }
 
         private List<Seleccion> CrearSelecciones()
